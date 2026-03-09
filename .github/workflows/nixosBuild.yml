@@ -18,29 +18,29 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            - uses: pnpm/action-setup@v3
+            - uses: oven-sh/setup-bun@v2
+              with:
+                  bun-version: 1.3.9
 
             - name: Use Node.js 20
               uses: actions/setup-node@v4
               with:
                   node-version: 20
-                  cache: "pnpm"
-
             - name: Install dependencies
-              run: pnpm install --frozen-lockfile
+              run: bun install --frozen-lockfile
 
             - name: Build web
-              run: pnpm buildWebStandalone
+              run: bun run buildWebStandalone
 
             - name: Build
-              run: pnpm buildStandalone
+              run: bun run buildStandalone
 
             - name: Generate plugin lists
               run: |
-                  pnpm generatePluginJson dist/plugins.json
-                  pnpm generateEquicordPluginJson dist/equicordplugins.json
-                  pnpm generateVencordPluginJson dist/vencordplugins.json
-                  pnpm generateDevsList dist/devs.json
+                  bun run generatePluginJson dist/plugins.json
+                  bun run generateEquicordPluginJson dist/equicordplugins.json
+                  bun run generateVencordPluginJson dist/vencordplugins.json
+                  bun run generateDevsList dist/devs.json
 
             - name: Collect files to be released
               run: |

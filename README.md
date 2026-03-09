@@ -39,12 +39,14 @@ sh -c "$(curl -sS https://raw.githubusercontent.com/Equicord/Equicord/refs/heads
 
 [Git](https://git-scm.com/download) and [Node.JS LTS](https://nodejs.dev/en/) are required.
 
-Install `pnpm`:
+This repo uses `bun@1.3.9`.
 
-> :exclamation: This next command may need to be run as admin/root depending on your system, and you may need to close and reopen your terminal for pnpm to be in your PATH.
+Install `bun`:
+
+> :exclamation: This next command may need to be run as admin/root depending on your system, and you may need to close and reopen your terminal for bun to be in your PATH.
 
 ```shell
-npm i -g pnpm
+curl -fsSL https://bun.sh/install | bash
 ```
 
 > :exclamation: **IMPORTANT** Make sure you aren't using an admin/root terminal from here onwards. It **will** mess up your Discord/Equicord instance and you **will** most likely have to reinstall.
@@ -59,25 +61,25 @@ cd Equicord
 Install dependencies:
 
 ```shell
-pnpm install --frozen-lockfile
+bun install --frozen-lockfile
 ```
 
 Build Equicord:
 
 ```shell
-pnpm build
+bun run build
 ```
 
 Inject Equicord into your desktop client:
 
 ```shell
-pnpm inject
+bun run inject
 ```
 
 Build Equicord for web:
 
 ```shell
-pnpm buildWeb
+bun run buildWeb
 ```
 
 After building Equicord's web extension, locate the appropriate ZIP file in the `dist` directory and follow your browser’s guide for installing custom extensions, if supported.

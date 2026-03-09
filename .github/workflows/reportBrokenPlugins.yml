@@ -31,20 +31,20 @@ jobs:
               with:
                   ref: ${{ github.event_name == 'schedule' && 'dev' || github.ref }}
 
-            - uses: pnpm/action-setup@v3 # Install pnpm using packageManager key in package.json
+            - uses: oven-sh/setup-bun@v2
+              with:
+                  bun-version: 1.3.9
 
             - name: Use Node.js 20
               uses: actions/setup-node@v4
               with:
                   node-version: 20
-                  cache: "pnpm"
-
             - name: Install dependencies
               run: |
-                  pnpm install --frozen-lockfile --prefer-offline
+                  bun install --frozen-lockfile
 
             - name: Build Equicord Reporter Version
-              run: pnpm buildReporter
+              run: bun run buildReporter
 
             - name: Run Reporter
               timeout-minutes: 10

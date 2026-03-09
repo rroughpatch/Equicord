@@ -16,22 +16,22 @@ jobs:
 
         steps:
             - uses: actions/checkout@v4
-            - uses: pnpm/action-setup@v3 # Install pnpm using packageManager key in package.json
+            - uses: oven-sh/setup-bun@v2
+              with:
+                  bun-version: 1.3.9
 
             - name: Use Node.js 20
               uses: actions/setup-node@v4
               with:
                   node-version: 20
-                  cache: "pnpm"
-
             - name: Install dependencies
-              run: pnpm install --frozen-lockfile
+              run: bun install --frozen-lockfile
 
             - name: Lint & Test if desktop version compiles
-              run: pnpm test
+              run: bun run test
 
             - name: Test if web version compiles
-              run: pnpm buildWeb
+              run: bun run buildWeb
 
             - name: Test if plugin structure is valid
-              run: pnpm generatePluginJson
+              run: bun run generatePluginJson
